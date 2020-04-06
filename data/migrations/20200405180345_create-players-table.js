@@ -11,14 +11,17 @@ await knex.schema.createTable("games", (table) => {
     table.increments("id")
     table.date("date").notNullable()
     table.integer("holes").notNullable()
+
 })
 
-await knex.schema.createTable("score", (table) => {
+await knex.schema.createTable("player_games", (table) => {
     table.increments("id")
     table.integer("game_id").notNullable().references("id").inTable("games")
-    table.string("player_name").notNullable().references("name").inTable("players")
+    table.integer("player_id").notNullable().references("id").inTable("players")
     table.integer("net_score").notNullable()
     table.integer("gross_score").notNullable()   
+
+    table.primary([ "game_id", "player_id" ]);
 })
 
 
@@ -27,7 +30,7 @@ await knex.schema.createTable("score", (table) => {
   };
   
   exports.down = async function(knex) {
-      await knex.schema.dropTableIfExists("score")
+      await knex.schema.dropTableIfExists("player_games")
       await knex.schema.dropTableIfExists("games")
       await knex.schema.dropTableIfExists("players")
   };
