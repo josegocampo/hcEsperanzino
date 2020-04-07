@@ -2,13 +2,13 @@ const express = require('express')
 const server = express()
 
 const playersRoute = require('./routes/players-route')
-// const gamesRoute = require('./routes/games-route')
+const gamesRoute = require('./routes/games-route')
 
 
 server.use(express.json())
 
 server.use('/players', playersRoute)
-// server.use('/games', gamesRoute)
+server.use('/games', gamesRoute)
 // server.use('/projects/:id', tasksRoute)
 // server.use('/projects/:id', rpRoute)
 

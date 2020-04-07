@@ -5,19 +5,20 @@ const db = require('../data/config')
 
 
 async function getAll(){
-    return await db.table('games')
+    return await db.table('handicap')
 }
 
 async function getById(id){
-    const games = await db.table('games')
-    .where('games.id', id)
-    return games
+    const players = await db.table('players')
+    .where('players.id', id)
+    return players
 }
 
 async function insert(data){
     return await db('players')
     .insert({
-        date: data.date,
+        name: data.name,
+        password: data.password,
     })
 }
 
