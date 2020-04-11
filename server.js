@@ -3,14 +3,16 @@ const server = express()
 
 const playersRoute = require('./routes/players-route')
 const gamesRoute = require('./routes/games-route')
+const handicapRoute = require('./routes/handicap-route')
+const playerGamesRoute = require('./routes/player-games-route')
 
 
 server.use(express.json())
 
 server.use('/players', playersRoute)
 server.use('/games', gamesRoute)
-// server.use('/projects/:id', tasksRoute)
-// server.use('/projects/:id', rpRoute)
+server.use('/players/:id', handicapRoute)
+server.use('/players', playerGamesRoute)
 
 server.use((err, req, res, next) => {
 	console.log(err)

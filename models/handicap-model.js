@@ -15,10 +15,10 @@ async function getById(id){
 }
 
 async function insert(data){
-    return await db('players')
+    return await db('handicap')
     .insert({
-        name: data.name,
-        password: data.password,
+        id: data.id,
+        handicap: data.handicap,
     })
 }
 

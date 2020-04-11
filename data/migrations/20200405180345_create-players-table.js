@@ -13,10 +13,11 @@ await knex.schema.createTable("games", (table) => {
 })
 
 await knex.schema.createTable("player_games", (table) => {
-    table.increments("id")
-    table.integer("game_id").notNullable().references("id").inTable("games")
-    table.integer("player_id").notNullable().references("id").inTable("players")
-    table.integer("holes").notNullable()
+
+    table.integer("game_id").notNullable().references("id").inTable("games").onDelete("CASCADE").onUpdate("CASCADE")
+    table.integer("player_id").notNullable().references("id").inTable("players").onDelete("CASCADE").onUpdate("CASCADE")
+    table.date("game_date").notNullable().references("date").inTable("games").onDelete("CASCADE").onUpdate("CASCADE")
+    table.integer("holes_played").notNullable()
     table.integer("net_score").notNullable()
     table.integer("gross_score").notNullable()   
 
@@ -26,13 +27,12 @@ await knex.schema.createTable("player_games", (table) => {
 
 await knex.schema.createTable("handicap_history", (table) => {
     table.increments("id")
-    table.integer("player_id").notNullable().references("id").inTable("players")
+    table.integer("player_id").notNullable().references("id").inTable("players").onDelete("CASCADE").onUpdate("CASCADE")
     table.timestamp("recorded_on").notNullable()
     table.integer("handicap").notNullable()
 })
 
   
-    
   };
   
   exports.down = async function(knex) {

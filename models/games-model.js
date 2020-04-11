@@ -9,13 +9,13 @@ async function getAll(){
 }
 
 async function getById(id){
-    const games = await db.table('games')
+    const games = await db.table('player_games')
     .where('games.id', id)
     return games
 }
 
 async function insert(data){
-    return await db('players')
+    return await db('games')
     .insert({
         date: data.date,
     })
