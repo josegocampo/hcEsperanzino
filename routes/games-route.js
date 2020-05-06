@@ -31,5 +31,27 @@ router.post("/", async (req, res, next) =>{
     }
 })
 
+router.post("/:id/gameinfo", async (req, res, next) =>{
+    console.log(req.body)
+    const gameInfo = req.body
+    const gameId = req.params.id
+    console.log(gameInfo)
+    try{
+        res.json(await db.insert(gameId, gameInfo))
+    }
+    catch(err){
+        next(err)
+    }
+})
+
+router.get("/:id/gameinfo", async (req, res, next) =>{
+    try{
+        res.json(await db.getGameInfo(req.params.id))
+    }
+    catch(err){
+        next(err)
+    }
+})
+
 
 module.exports = router;

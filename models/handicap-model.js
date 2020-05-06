@@ -1,6 +1,3 @@
-const express = require('express')
-const router = express.Router()
-
 const db = require('../data/config')
 
 
@@ -9,9 +6,10 @@ async function getAll(){
 }
 
 async function getById(id){
-    const players = await db.table('players')
-    .where('players.id', id)
-    return players
+    const playerHandicap = await db.table('handicap as h')
+    .where('h.player_id', id)
+    .select('h.handicap_number as Handicap')
+    return playerHandicap
 }
 
 async function insert(data){

@@ -1,18 +1,18 @@
 const express = require('express')
 const server = express()
 
-const playersRoute = require('./routes/players-route')
-const gamesRoute = require('./routes/games-route')
-const handicapRoute = require('./routes/handicap-route')
-const playerGamesRoute = require('./routes/player-games-route')
+const players = require('./routes/players-route')
+const games = require('./routes/games-route')
+const handicap = require('./routes/handicap-route')
+const playerGames = require('./routes/player-games-route')
 
 
 server.use(express.json())
 
-server.use('/players', playersRoute)
-server.use('/games', gamesRoute)
-server.use('/players/:id', handicapRoute)
-server.use('/players', playerGamesRoute)
+server.use('/players', players)
+server.use('/games', games)
+server.use('/players/:id', handicap)
+server.use('/players', playerGames)
 
 server.use((err, req, res, next) => {
 	console.log(err)
