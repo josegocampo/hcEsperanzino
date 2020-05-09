@@ -12,49 +12,39 @@ async function getById(id){
 }
 
 async function insert(data){
-    return await db('games')
+    return db('games')
     .insert({
-        date: data.date,
+
     })
 }
 
+function addGame(gameId, gameInfo) {
 
-function addGame(gameId, gameInfo){
-
-     gameInfo.forEach((player) =>{
-      return db('player_games')
-      .insert({
-          game_id: gameId,
-          player_id: player.playerId,
-          holes_played: player.holesPlayed,
-          net_score: player.netScore,
-          gross_score: player.grossScore
-      })      
-    })
+    if (Array.isArray(gameInfo)){
+	  return db('player_games').insert(
+		gameInfo.map((player) => ({
+			game_id: gameId,
+			player_id: player.player_id,
+			holes_played: player.holes_played,
+			net_score: player.net_score,
+			gross_score: player.gross_score
+		})
+	))
+}
+    else {
+      return db('player_games').insert(
+          {
+            game_id: gameId,
+            player_id: gameInfo.player_id,
+            holes_played: gameInfo.holes_played,
+            net_score: gameInfo.net_score,
+            gross_score: gameInfo.gross_score
+      })    
+    }
+}
+ 
   
-    // return await db('player_games')  
-    // .insert({
-    //     game_id: gameInfo.gameId,
-    //     player_id: gameInfo.forEach((playerInfo)=>{
-    //         playerInfo.playerId
-    //     }),
-    //     holes_played: gameInfo.forEach((playerInfo)=>{
-    //         playerInfo.holesPlayed
-    //     }),
-    //     net_score: gameInfo.forEach((playerInfo)=>{
-    //         playerInfo.netScore
-    //     }),
-    //     gross_score: gameInfo.forEach((playerInfo)=>{
-    //         playerInfo.grossScore
-    //     }),
-        
-      
-    //     })
-       
-   
-  }
-  
-  async function getGameInfo(id){
+async function getGameInfo(id){
     const games = await db.table('player_games as pg')
     .where('pg.game_id', id)
     return games

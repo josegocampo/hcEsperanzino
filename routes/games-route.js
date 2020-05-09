@@ -32,12 +32,8 @@ router.post("/", async (req, res, next) =>{
 })
 
 router.post("/:id/gameinfo", async (req, res, next) =>{
-    console.log(req.body)
-    const gameInfo = req.body
-    const gameId = req.params.id
-    console.log(gameInfo)
     try{
-        res.json(await db.insert(gameId, gameInfo))
+        res.json(await db.addGame(req.params.id, req.body))
     }
     catch(err){
         next(err)
