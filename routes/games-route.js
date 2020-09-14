@@ -3,7 +3,6 @@ const router = express.Router()
 
 const db = require('../models/games-model')
 
-//este end point deberia obtener toda la lista de games jugados
 router.get("/", async (req, res, next) =>{
     try{
         res.json(await db.getAll())
@@ -13,7 +12,6 @@ router.get("/", async (req, res, next) =>{
     }
 })
 
-//este end point deberia obtener la info de cada game individual, los jugadores involucrados y sus score
 router.get('/:id', async (req, res, next)=>{
     try{
         res.json(await db.getById(req.params.id))

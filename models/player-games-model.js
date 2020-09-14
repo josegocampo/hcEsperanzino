@@ -14,3 +14,7 @@
 // module.exports = {
 //     getRp
 // };
+
+
+//not using this component currently
+//getting the player games from the players model atm
