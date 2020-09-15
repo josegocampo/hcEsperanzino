@@ -1,0 +1,27 @@
+{
+  "name": "hcesperanzino",
+  "version": "1.0.0",
+  "description": "app that calculates your golf HC according to the latest USGA rules",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "server": "nodemon server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/josegocampo/hcEsperanzino.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/josegocampo/hcEsperanzino/issues"
+  },
+  "homepage": "https://github.com/josegocampo/hcEsperanzino#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "express-router": "0.0.1",
+    "knex": "^0.20.13",
+    "sqlite3": "^4.1.1"
+  }
+}
