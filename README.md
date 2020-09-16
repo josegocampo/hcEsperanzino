@@ -16,14 +16,14 @@ The API is located on https://hcesperanzino.herokuapp.com/ and the end points to
 
 The Database will be composed of 4 tables, **Players**, **Games**, **Player_Games** (which is a Join Table between player and games because of the many to many relationship between them) and **Handicap**. \
  \
-For now the register part will be handled by the admin as they want to keep control of who is allowed to join, and users will only be given login access. \
+For now the register part will be handled by the admin as they want to keep control of who is allowed to join, and users will only be given login access. 
 
-
+<br/><br/>
 **<span style="text-decoration:underline;">TABLES</span>**
 
 
 
-*   **players** \
+*   **players** 
 
 
 <table>
@@ -56,12 +56,12 @@ For now the register part will be handled by the admin as they want to keep cont
 
 
 
-     \
+     
 
 
 
 
-*   **games** \
+*   **games** 
 
 
 <table>
@@ -83,7 +83,7 @@ For now the register part will be handled by the admin as they want to keep cont
 
 
 
-*   **player_games** \
+*   **player_games** 
 
 
 <table>
@@ -142,7 +142,7 @@ price
 
 
 
-     \
+     
 
 
 
@@ -183,10 +183,10 @@ price
   </tr>
 </table>
 
-
+<br/><br/>
 **<span style="text-decoration:underline;">ENDPOINTS: </span>**
 
-**<span style="text-decoration:underline;">Register and Login endpoint:</span>** \
+**<span style="text-decoration:underline;"><ins>Register and Login endpoint</ins>:</span>** \
  \
 **.post(“/”)**   // register a new player
 
@@ -201,10 +201,10 @@ price
 *   the login object needs to send only a **name **and a **password**. No need to send the role when logging in, as the backend will search both databases for the user and send back the one that corresponds. \
 
 *   if the login is correct, meaning **name **and **password **correspond to a user in the database then the response will send out a cookie “token” containing the user info.
+<br/><br/>
+**<span style="text-decoration:underline;"><ins>Players endpoint</ins>:</span>**
 
-**<span style="text-decoration:underline;">Players endpoint:</span>**
-
-**GET  (“/players**”)     // returns a list of all players.
+**GET**  (“/players**”)     // returns a list of all players.
 
 
 
@@ -212,73 +212,73 @@ price
 
  
 
-**GET  (“/players/:id”)     // **returns an individual player.
+**GET**  (“/players/:id”)     // **returns an individual player.
 
 
 
 *   returns >>>   an object containing  **{id, name, handicap}**  for a specific user.
 
-**GET  (“/players/:id/games”) **   // returns all the games by an individual player.
+**GET**  (“/players/:id/games”) **   // returns all the games by an individual player.
 
 
 
 *   returns >>>   //** **a list with an individual player's past games, with scores per hole, hc, gross, and net score, game id,  and date.
+<br/><br/>
+**<span style="text-decoration:underline;"><ins>Games endpoint</ins>:</span>**
 
-**<span style="text-decoration:underline;">Games endpoint:</span>**
-
-**GET  (“/games/”)  **//returns a list of all the games played
+**GET**  (“/games/”)  **//returns a list of all the games played
 
 
 
 *   returns >>>   an array of objects, each object containing all previous games
 
-**POST (“/games/”)  **//posts a new game to the database.
+**POST** (“/games/”)  **//posts a new game to the database.
 
 
 
 *   no need to send any data in the request, as we are only looking for an id here which will be created automatically as the primary key.
 
-**GET (“/games/:id”) **// returns a specific game
+**GET** (“/games/:id”) **// returns a specific game
 
 
 
 *   returns >>>   an object containing the info for a specific game.
 
-**GET  (“/games/gameinfo”)  **//returns a list of all the games played and their info.
+**GET**  (“/games/gameinfo”)  **//returns a list of all the games played and their info.
 
 
 
 *   returns >>>   an array of objects, each object containing all previous games with their info, date, players, player scores, comes from the player_games table which joins the players and games tables.
 
-**GET (“games/:id/gameinfo”)  **// returns the complete info for a specific game.
+**GET** (“games/:id/gameinfo”)  **// returns the complete info for a specific game.
 
 
 
 *   returns >>> an array of objects in which every object is the information of a player for that specific game, comes for the player_games table which joins players and games.
 
-**POST (“/games/:id/gameinfo”)  **//posts new game information to a game after it has been finished.
+**POST** (“/games/:id/gameinfo”)  **//posts new game information to a game after it has been finished.
 
 
 
 *   sent object requires >>>> per each player playing, we have to sent an object with the following data:
 
 	game_id, player_id, holes_played, hc_score, gross_score, net_score and the individual score per each hole, hole1, hole2, ….hole9.
+<br/><br/>
+**<span style="text-decoration:underline;"><ins>Handicaps endpoint:</ins></span>**
 
-**<span style="text-decoration:underline;">Handicaps endpoint (Optional thinking if I really want or need this):</span>**
-
-**GET  (“/players/handicaps”)  **//returns a list of all players handicaps and their history.
+**GET**  (“/players/handicaps”)  **//returns a list of all players handicaps and their history.
 
 
 
 *   returns >>>   an array of objects, each object containing the history of the handicap of every player.
 
-**GET  (“/players/:id/handicap”)  **//returns a single player handicap history.
+**GET**  (“/players/:id/handicap”)  **//returns a single player handicap history.
 
 
 
 *   returns >>>   an object containing the information of a player and its handicap history.
 
-**POST (“/players/:id/handicap”)  **//posts a new handicap to a player handicaps history.
+**POST** (“/players/:id/handicap”)  **//posts a new handicap to a player handicaps history.
 
 
 
