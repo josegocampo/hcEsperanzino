@@ -20,7 +20,7 @@ router.get('/:id/handicap', async (req, res, next)=>{
     }
 })
 
-router.post("/", async (req, res, next) =>{
+router.post("/:id/handicap", async (req, res, next) =>{
     try{
         res.json(await db.insert(req.body))
     }
