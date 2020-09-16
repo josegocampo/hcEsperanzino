@@ -126,8 +126,6 @@ For now the register part will be handled by the admin as they want to keep cont
   </tr>
   <tr>
    <td>net_score
-<p>
-price
    </td>
    <td>unsigned integer
    </td>
