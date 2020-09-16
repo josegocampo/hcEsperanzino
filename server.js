@@ -1,6 +1,7 @@
 
 const express = require('express')
 const server = express()
+const port = process.env.PORT || 4000
 
 const players = require('./routes/players-route')
 const games = require('./routes/games-route')
@@ -30,9 +31,6 @@ server.get('/', (req, res)=>{
 })
 
 
-
-const PORT = 4000;
-
-server.listen(PORT, () => {
-    console.log(`Server is running on http://localhost:${PORT}`);
+server.listen(port, () => {
+    console.log(`Server is running at http://localhost:${port}`);
 })
