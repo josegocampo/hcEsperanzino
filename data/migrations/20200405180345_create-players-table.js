@@ -15,6 +15,7 @@ await knex.schema.createTable("player_games", (table) => {
 
     table.integer("game_id").notNullable().references("id").inTable("games").onDelete("CASCADE").onUpdate("CASCADE")
     table.integer("player_id").notNullable().references("id").inTable("players").onDelete("CASCADE").onUpdate("CASCADE")
+    table.string("player_name").notNullable().references("name").inTable("players").onDelete("CASCADE").onUpdate("CASCADE")
     table.timestamp('created_at').defaultTo(knex.fn.now());
     table.integer("holes_played").notNullable()
     table.integer("hc_score").notNullable()

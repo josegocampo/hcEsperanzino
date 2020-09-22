@@ -12,10 +12,8 @@ async function getById(id){
      .where('pg.player_id', id)
      .where('pg.holes_played', 9)
      
-
      const handicapArray = getScoreNine.map((netScore) => netScore.hc_score)
  
-
      let totalScore = 0
 
      const addScore = handicapArray.map((score) => {
@@ -23,20 +21,23 @@ async function getById(id){
         return totalScore
     })
     
-    let handicap = Math.round(totalScore/ handicapArray.length * 0.96)
+    let handicap = Math.round(totalScore / handicapArray.length * 0.96)
 
-    console.log(handicap)
-   
-     
-
-    const players = await db.table('player_games as pg')
-    .join('players as p', 'p.id', 'pg.player_id')
-    .orderBy('pg.created_at', 'desc').limit(2)
-    .where('p.id', id) //
-    .select('p.*')
+    let hc = {"handicap" : handicap}
     
+   
+    const player = await db.table('players')
+    .where('players.id', id)
+    .select('players.*', hc)
+ 
 
-    return players
+    // const players = await db.table('player_games as pg')
+    // .join('players as p', 'p.id', 'pg.player_id')
+    // .orderBy('pg.created_at', 'desc').limit(2)
+    // .where('p.id', id) //
+    // .select('p.*')
+    
+    return player
 }
 
 async function insert(data){

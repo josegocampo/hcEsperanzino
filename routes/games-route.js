@@ -12,6 +12,15 @@ router.get("/", async (req, res, next) =>{
     }
 })
 
+router.get("/gameinfo", async (req, res, next) =>{
+    try{
+        res.json(await db.getAllPlayerGames())
+    }
+    catch(err){
+        next(err)
+    }
+})
+
 router.get('/:id', async (req, res, next)=>{
     try{
         res.json(await db.getById(req.params.id))
@@ -19,6 +28,8 @@ router.get('/:id', async (req, res, next)=>{
         next(err)
     }
 })
+
+
 
 router.post("/", async (req, res, next) =>{
     try{

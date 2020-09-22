@@ -5,6 +5,10 @@ async function getAll(){
     return await db.table('games')
 }
 
+async function getAllPlayerGames(){
+    return await db.table('player_games')
+}
+
 async function getById(id){
     const games = await db.table('games')
     .where('games.id', id)
@@ -24,7 +28,8 @@ async function addGame(gameId, gameInfo) {
 	  return db('player_games').insert(
 		gameInfo.map((player) => ({
 			game_id: gameId,
-			player_id: player.player_id,
+            player_id: player.player_id,
+            player_name : player.player_name,
 			holes_played: player.holes_played,
 			net_score: player.net_score,
             gross_score: player.gross_score,
@@ -46,6 +51,7 @@ async function addGame(gameId, gameInfo) {
           {
             game_id: gameId,
             player_id: gameInfo.player_id,
+            player_name: gameInfo.player_name,
             holes_played: gameInfo.holes_played,
             net_score: gameInfo.net_score,
             gross_score: gameInfo.gross_score,
@@ -73,6 +79,7 @@ async function getGameInfo(id){
 
 module.exports = {
     getAll,
+    getAllPlayerGames,
     getById,
     insert,
     addGame,
